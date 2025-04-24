@@ -11,14 +11,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       titleTextStyle: TextStyle(
         fontFamily: 'Arial',
-        fontSize: 30,
-        wordSpacing: 0.2,
+        fontSize: 35,
+        color: Colors.white
       ),
-      backgroundColor: Colors.purple,
-      foregroundColor: Colors.black,
+      backgroundColor: Colors.deepPurple,
+      foregroundColor: Colors.white,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(110);
+  Size get preferredSize => const Size.fromHeight(85);
 }

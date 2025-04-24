@@ -15,7 +15,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
       TextEditingController(); //novo
   final TextEditingController _textEditingController = TextEditingController();
 
-  List<String> tarefas = [];
+  List<String> tarefas = ['a','a','a','a','a','a','a','a','a','a','a','a','a','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',];
 
   void adicionar() {
     if (_textAddingController.text.isNotEmpty) {
@@ -187,14 +187,14 @@ class _ToDoListPageState extends State<ToDoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(appBarTitle: 'Agenda'),
+      appBar: MyAppBar(appBarTitle: 'Tarefas Diárias'),
       drawer: MyAppDrawer(),
       body: Container(
         padding: EdgeInsets.all(24),
         child: Column(
           children: <Widget>[
             Container(
-              height: 600,
+              height: MediaQuery.of(context).size.height - 165,
               margin: EdgeInsets.only(top: 30),
               child: ListView.builder(
                 //novo //novo
@@ -216,6 +216,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
           ],
         ),
       ),
+
       floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
