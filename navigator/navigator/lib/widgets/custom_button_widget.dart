@@ -25,15 +25,16 @@ class CustomButtonWidget extends StatelessWidget {
           return Colors.green;
         }),
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000000)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         textStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.pressed)) return TextStyle(fontSize: titleSize != null ? titleSize! * 2 : 28);
+          if (states.contains(WidgetState.pressed))
+            return TextStyle(fontSize: titleSize != null ? titleSize! * 2 : 28);
           return TextStyle(fontSize: titleSize);
         }),
         foregroundColor: WidgetStateProperty.resolveWith((states) {
           return Colors.white;
-        })
+        }),
       ),
     );
   }

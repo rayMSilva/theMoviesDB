@@ -24,8 +24,8 @@ class _TarefaState extends State<Tarefa> {
         motion: DrawerMotion(),
         children: [
           SlidableAction(
-            onPressed: (context) {
-              widget.editar();
+            onPressed: (context) async{
+              await widget.editar();
             },
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
