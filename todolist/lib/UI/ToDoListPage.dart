@@ -137,7 +137,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
           title: Text('Editar Tarefa'),
           content: TextField(
             controller: _textEditingController,
-            decoration: InputDecoration(hintText: 'Digite o título da tarefa'),
+            decoration: InputDecoration(hintText: 'Digite o título da tarefa', labelText: tarefas[index]),
           ),
           actions: [
             TextButton(
