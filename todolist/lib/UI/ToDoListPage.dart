@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/Widgets/appBar.dart';
 import 'package:todolist/Widgets/drawer.dart';
+import 'package:todolist/Widgets/show_dialog.dart';
 import 'package:todolist/Widgets/tarefa.dart';
 
 class ToDoListPage extends StatefulWidget {
@@ -15,7 +16,20 @@ class _ToDoListPageState extends State<ToDoListPage> {
       TextEditingController(); //novo
   final TextEditingController _textEditingController = TextEditingController();
 
-  List<String> tarefas = ['a','a','a','a','a','a','a','a','a','a','a','a','a','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',];
+  List<String> tarefas = [
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+    'a',
+  ];
 
   void adicionar() {
     if (_textAddingController.text.isNotEmpty) {
@@ -72,65 +86,57 @@ class _ToDoListPageState extends State<ToDoListPage> {
     });
   }
 
-  void adicionarTarefaDialogButton() {
-    showDialog(
+  Future<void> adicionarTarefaDialogButton() async{
+    return await MyDialog.show(
+      title: 'Nova Tarefa',
+      actions: [
+        Acao(
+          acao: () {
+            Navigator.of(context).pop();
+          },
+          actionText: 'Cancelar',
+        ),
+        Acao(acao: () {
+          adicionar();
+        }, actionText: 'Salvar')
+      ],
+      dialogContent: TextField(
+        controller: _textAddingController,
+        decoration: InputDecoration(hintText: 'Digite o Título da tarefa'),
+      ),
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Nova Tarefa'),
-          content: TextField(
-            controller: _textAddingController,
-            decoration: InputDecoration(hintText: 'Digite o título da tarefa'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                adicionar();
-              },
-              child: Text('Salvar'),
-            ),
-          ],
-        );
-      },
+      dissmissable: false,
     );
   }
 
-  void deletarTarefaDialogButton() {
-    showDialog(
+  Future<void> deletarTarefaDialogButton() async {
+    return await MyDialog.show(
+      title: 'Remover Todas Tarefas',
+      actions: [
+        Acao(
+          acao: () {
+            Navigator.of(context).pop();
+          },
+          actionText: 'Cancelar',
+        ),
+        Acao(
+          acao: () {
+            deletarTodos();
+          },
+          actionText: 'Apagar',
+        ),
+      ],
+      dialogContent: Text(
+        '?!Certeza que deseja remover todos as tarefas do dia!?',
+      ),
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Remover'),
-          content: Text(
-            '?!Certeza que deseja remover todos as tarefas do dia!?',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                deletarTodos();
-              },
-              child: Text('APAGAR'),
-            ),
-          ],
-        );
-      },
+      dissmissable: false,
     );
   }
 
-  void slideEdit(int index) {
-    showDialog(
+  Future<void> slideEdit(int index) async {
+    _textEditingController.text = tarefas[index];
+    return await MyDialog.show(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -154,33 +160,50 @@ class _ToDoListPageState extends State<ToDoListPage> {
             ),
           ],
         );
-      },
+      }
+      dissmissable: false,
+      title: 'Editar Tarefa',
+      dialogContent: TextField(
+        controller: _textEditingController,
+        decoration: InputDecoration(hintText: 'Digite o novo título da tarefa'),
+      ),
+      actions: [
+        Acao(
+          acao: () {
+            Navigator.of(context).pop();
+          },
+          actionText: 'Cancelar',
+        ),
+        Acao(
+          acao: () {
+            editar(_textEditingController.text, index);
+          },
+          actionText: 'Salvar',
+        ),
+      ],
     );
   }
 
-  void slideRemove(int index) {
-    showDialog(
+  Future<void> slideRemove(int index) async {
+    return await MyDialog.show(
+      title: 'Remover Tarefa',
+      actions: [
+        Acao(
+          acao: () {
+            Navigator.of(context).pop();
+          },
+          actionText: 'Cancelar',
+        ),
+        Acao(
+          acao: () {
+            deletar(index);
+          },
+          actionText: 'Apagar',
+        ),
+      ],
+      dialogContent: Text('?!CERTEZA QUE DESEJA REMOVER ESTA TAREFA?!'),
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Remover'),
-          content: Text('?!Certeza que deseja remover esta tarefa do dia!?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                deletar(index);
-              },
-              child: Text('APAGAR'),
-            ),
-          ],
-        );
-      },
+      dissmissable: true,
     );
   }
 
@@ -206,8 +229,8 @@ class _ToDoListPageState extends State<ToDoListPage> {
                     deletar: () {
                       slideRemove(index);
                     },
-                    editar: () {
-                      slideEdit(index);
+                    editar: () async {
+                      await slideEdit(index);
                     },
                   );
                 },

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/UI/ToDoListPage.dart';
-import 'package:todolist/UI/pages/Config.dart';
-import 'package:todolist/UI/pages/User.dart';
 
 class MyAppDrawer extends StatefulWidget {
   const MyAppDrawer({super.key});
@@ -27,9 +24,7 @@ class _MyAppDrawerState extends State<MyAppDrawer> {
               leading: Icon(Icons.person),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (context) => const MyUser()));
+                Navigator.of(context).pushReplacementNamed('/Profile');
               },
             ),
             ListTile(
@@ -37,9 +32,7 @@ class _MyAppDrawerState extends State<MyAppDrawer> {
               leading: Icon(Icons.check),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (context) => ToDoListPage()));
+                Navigator.of(context).pushReplacementNamed('/');
               },
             ),
             ListTile(
@@ -47,9 +40,7 @@ class _MyAppDrawerState extends State<MyAppDrawer> {
               leading: Icon(Icons.settings),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const MyConfig()),
-                );
+                Navigator.of(context).pushReplacementNamed('/Config');
               },
             ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigator/one_page.dart';
+import 'package:navigator/views/one_page.dart';
 import 'package:navigator/third_page.dart';
 import 'package:navigator/two_page.dart';
 
