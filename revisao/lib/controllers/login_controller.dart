@@ -6,7 +6,7 @@ class LoginController {
 
   String? _login;
 
-  setlogin(String value) => _login = value;
+  setLogin(String value) => _login = value;
 
   String? _senha;
 
