@@ -26,8 +26,6 @@ class MyDialog extends StatelessWidget {
     required dynamic context,
     required bool dissmissable,
   }) async 
-  
-  
   {
     showDialog(
       context: context,

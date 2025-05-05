@@ -138,29 +138,6 @@ class _ToDoListPageState extends State<ToDoListPage> {
     _textEditingController.text = tarefas[index];
     return await MyDialog.show(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Editar Tarefa'),
-          content: TextField(
-            controller: _textEditingController,
-            decoration: InputDecoration(hintText: 'Digite o título da tarefa', labelText: tarefas[index]),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                editar(_textEditingController.text, index);
-              },
-              child: Text('Salvar'),
-            ),
-          ],
-        );
-      }
       dissmissable: false,
       title: 'Editar Tarefa',
       dialogContent: TextField(
@@ -217,7 +194,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
         child: Column(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height - 165,
+              height: MediaQuery.of(context).size.height - 250,
               margin: EdgeInsets.only(top: 30),
               child: ListView.builder(
                 //novo //novo
