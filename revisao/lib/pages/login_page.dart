@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:revisao/components/login/custom_login_buttom_component.dart';
 import 'package:revisao/controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -28,32 +29,7 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
             ),
             SizedBox(height: 15),
-            ValueListenableBuilder(
-              valueListenable: _controller.inLoader,
-              builder:
-                  (_, inLoader, __) =>
-                      inLoader
-                          ? CircularProgressIndicator()
-                          : ElevatedButton(
-                            onPressed: () {
-                              _controller.auth().then((result) {
-                                if (result) {
-                                  Navigator.of(
-                                    context,
-                                  ).pushReplacementNamed('/home');
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: const Text('Falha ao realizar Login!'),
-                                      duration: const Duration(seconds: 5),
-                                    ),
-                                  );
-                                }
-                              });
-                            },
-                            child: Text('Login'),
-                          ),
-            ),
+            CustomLoginButtonComponent(),
           ],
         ),
       ),
